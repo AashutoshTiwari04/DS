@@ -1,39 +1,35 @@
-Objective: To implement Binary Search.
-
+Objective: To implement Insertion Sorting.
 
 #include <stdio.h>
-// Function to perform binary search
-int binarySearch(int arr[], int low, int high, int key) {
- while (low <= high) {
- int mid = low + (high - low) / 2;
- // Check if key is at mid
- if (arr[mid] == key)
- return mid;
-// If key is greater, ignore left half
- if (arr[mid] < key)
- low = mid + 1;
- // If key is smaller, ignore right half
- else
- high = mid - 1;
- }
- return -1; // Key not found
+void insertionSort(int arr[], int n) {
+ int i, key, j;
+ for (i = 1; i < n; i++) {
+ key = arr[i];
+ j = i - 1;
+ // Move elements that are greater than key to one position ahead
+ while (j >= 0 && arr[j] > key) {
+ arr[j + 1] = arr[j];
+ j = j - 1;
 }
-// Function to print array
+ arr[j + 1] = key;
+ }
+}
+// Function to print the array
 void printArray(int arr[], int n) {
- for (int i = 0; i < n; i++)
+ int i;
+ for (i = 0; i < n; i++)
  printf("%d ", arr[i]);
  printf("\n");
 }
+// Main function
 int main() {
- int arr[] = {2, 4, 10, 15, 18, 23, 32}; // Sorted array
+ int arr[] = {12, 11, 13, 5, 6};
  int n = sizeof(arr) / sizeof(arr[0]);
- int key = 15;
- printf("Array:\n");
+ printf("Original array:\n");
  printArray(arr, n);
- int result = binarySearch(arr, 0, n - 1, key);
- if (result != -1)
- printf("Element %d found at index %d.\n", key, result);
- else
- printf("Element %d not found in the array.\n", key);
+ insertionSort(arr, n);
+ printf("Sorted array:\n");
+ printArray(arr, n);
  return 0;
 }
+
